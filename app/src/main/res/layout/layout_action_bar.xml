@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/tool_bar"
+    android:background="@color/colorBule"
+    android:minHeight="?attr/actionBarSize">
+
+    <ImageView
+        android:layout_marginLeft="10dp"
+        android:id="@+id/toolbar_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:background="@drawable/btn_titile_back_selector"/>
+
+    <TextView
+        android:id="@+id/toolbar_title"
+        android:layout_centerInParent="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/white"
+        android:lines="1"
+        android:ellipsize="end"
+        android:scrollHorizontally="true"
+        android:layout_gravity="center"
+        style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
+        android:text="首页"/>
+
+    <ImageView
+        android:id="@+id/toolbar_menu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/btn_title_help_selector"
+        android:layout_marginRight="10dp"
+        android:layout_gravity="right"
+        android:visibility="visible"/>
+
+    <TextView
+        android:id="@+id/toolbar_subtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/white"
+        android:layout_marginRight="10dp"
+        android:layout_gravity="right"
+        style="@style/TextAppearance.AppCompat.Widget.ActionBar.Subtitle"
+        android:text="注册"
+        android:visibility="gone"/>
+
+
+</android.support.v7.widget.Toolbar>

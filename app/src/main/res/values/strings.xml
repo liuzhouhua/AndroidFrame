@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">TT火车票</string>
+    <string name="main_title">火车票</string>
+    <string name="bar_book">订票</string>
+    <string name="bar_grab">抢票</string>
+    <string name="bar_order">订单</string>
+    <string name="bar_server">服务</string>
+    <string name="bar_me">我</string>
+
+    <string name="main_leave">出发地</string>
+    <string name="main_query">查询</string>
+    <string name="main_destination">目的地</string>
+    <string name="main_date">出发日期</string>
+    <string name="main_student">买学生票</string>
+    <string name="main_identity">身份核验须知</string>
+    <string name="main_attention">注意事项</string>
+
+    <string name="query_selection_from">选择出发站点</string>
+</resources>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <attr name="item_icon" format="reference"/>
+    <attr name="item_name" format="string"/>
+    <attr name="item_display" format="string"/>
+    <attr name="item_display_visibility" format="integer"/>
+    <attr name="item_forward_visibility" format="integer"/>
+    <attr name="item_switch_visibility" format="integer"/>
+    <attr name="item_line_visibility" format="integer"/>
+
+    <declare-styleable name="CustomLayoutItem">
+        <attr name="item_icon"/>
+        <attr name="item_name"/>
+        <attr name="item_display"/>
+        <attr name="item_display_visibility"/>
+        <attr name="item_forward_visibility"/>
+        <attr name="item_switch_visibility"/>
+        <attr name="item_line_visibility"/>
+    </declare-styleable>
+
+</resources>

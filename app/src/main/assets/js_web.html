@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>邹建DJ</title>
+
+    <script>
+         function callAndroid(){
+            hybrid_h5_call_native.h5CallNative("url_task");
+         }
+          function callAndroid1(){
+            hybrid_h5_call_native.h5CallNative("url_task1");
+         }
+        function callJS(){
+            alert("android调用了js中的callJS方法");
+         }
+
+
+    </script>
+</head>
+
+<body>
+<button type="button" id="button1" onclick="callAndroid()">js调用android中的代码1</button>
+<button type="button" id="button2" onclick="callAndroid1()">js调用android中的代码2</button>
+</body>
+
+</html>

@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom = "http://schemas.android.com/apk/res/com.lzh.administrator.androidframe"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:background="@color/colorMainBackground"
+        >
+    </LinearLayout>
+
+
+
+    <RelativeLayout
+        android:id="@+id/main_ll_1"
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/main_ll_line_1"
+            style="@style/common_horizontal_division_line_style" />
+
+        <com.lzh.administrator.androidframe.widget.CustomLayoutItem
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_below="@id/main_ll_line_1"
+            android:id="@+id/main_starting" />
+
+        <com.lzh.administrator.androidframe.widget.CustomLayoutItem
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:id="@+id/main_destination"
+            custom:item_icon="@drawable/main_destination"
+            custom:item_name="@string/main_destination"
+            custom:item_display="@string/main_destination"
+            android:layout_below="@id/main_starting"/>
+
+        <com.lzh.administrator.androidframe.widget.CustomLayoutItem
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:id="@+id/main_starting_date"
+            custom:item_icon="@drawable/main_date"
+            custom:item_name="@string/main_date"
+            custom:item_display="2016-09-22 周四"
+            android:layout_below="@id/main_destination"/>
+
+        <com.lzh.administrator.androidframe.widget.CustomLayoutItem
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:id="@+id/main_student_ticket"
+            custom:item_icon="@drawable/main_student"
+            custom:item_name="@string/main_student"
+            custom:item_display_visibility="8"
+            custom:item_forward_visibility="8"
+            custom:item_switch_visibility="0"
+            custom:item_line_visibility="4"
+            android:layout_below="@id/main_starting_date"/>
+
+        <TextView
+            android:layout_below="@id/main_student_ticket"
+            style="@style/common_horizontal_division_line_style" />
+
+        <ImageView
+            android:id="@+id/main_change"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/main_replace"
+            android:layout_marginTop="35dp"
+            android:layout_centerHorizontal="true"/>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/main_ll_2"
+        android:layout_below="@id/main_ll_1"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:orientation="vertical"
+        android:background="@color/colorMainBackground"
+        android:gravity="center">
+        <Button
+            android:background="@drawable/btn_main_query_ripple"
+            android:id="@+id/main_query_btn"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:text="@string/main_query"
+            android:textSize="16sp"
+            android:textColor="@android:color/white" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_below="@id/main_ll_2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            style="@style/common_horizontal_division_line_style"
+            />
+
+        <com.lzh.administrator.androidframe.widget.CustomLayoutItem
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:id="@+id/main_identity"
+            custom:item_icon="@drawable/main_identity"
+            custom:item_name="@string/main_identity"
+            custom:item_display_visibility="8"/>
+
+        <com.lzh.administrator.androidframe.widget.CustomLayoutItem
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:id="@+id/main_attention"
+            custom:item_icon="@drawable/main_attention"
+            custom:item_name="@string/main_attention"
+            custom:item_display_visibility="8"
+            custom:item_line_visibility="4"/>
+
+        <TextView
+            style="@style/common_horizontal_division_line_style"
+            android:layout_alignParentBottom="true" />
+
+    </LinearLayout>
+
+
+</RelativeLayout>

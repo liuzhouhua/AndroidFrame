@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="colorBule">#006cff</color>
+    <color name="colorBule_press">#6aaaff</color>
+    <color name="colorBule_Rippie">#FF005bd8</color>
+    <color name="colorBarBackground">#f9f9f9</color>
+    <color name="colorMainBackground">#efeff4</color>
+    <color name="colorgrey">#cacaca</color>
+    <color name="colordark">#ff333333</color>
+    <color name="colorSideBarText">#999999</color>
+    <color name="colorItemRippie">#FF919faa</color>
+    <color name="colorItemPress">#7fe1e1e1</color>
+    <color name="colorItemNormal">#7fe1e1e1</color>
+    <color name="colorDrakGrey">#969a9d</color>
+</resources>

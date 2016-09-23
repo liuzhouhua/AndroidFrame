@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <include layout="@layout/layout_query"
+        android:id="@+id/query_layout"/>
+
+    <!--<TextView-->
+        <!--android:id="@+id/station_location"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="当前"-->
+        <!--android:textColor="@color/colorDrakGrey"-->
+        <!--android:textSize="16sp"-->
+        <!--android:layout_marginRight="25dp"-->
+        <!--android:background="#e6edf3"-->
+        <!--android:padding="10dp"-->
+        <!--android:layout_below="@id/query_layout"/>-->
+
+    <!--<TextView-->
+        <!--android:id="@+id/station_location_content"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="苏州"-->
+        <!--android:textColor="@color/colordark"-->
+        <!--android:layout_marginRight="25dp"-->
+        <!--android:textSize="16sp"-->
+        <!--android:padding="10dp"-->
+        <!--android:layout_below="@id/station_location"/>-->
+
+    <!--<TextView-->
+        <!--android:id="@+id/station_history"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="热门"-->
+        <!--android:textColor="@color/colorDrakGrey"-->
+        <!--android:textSize="16sp"-->
+        <!--android:layout_marginRight="25dp"-->
+        <!--android:background="#e6edf3"-->
+        <!--android:padding="10dp"-->
+        <!--android:layout_below="@id/station_location_content"/>-->
+
+    <!--<com.lzh.administrator.androidframe.widget.FlowLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginRight="25dp"-->
+        <!--android:background="#e6edf3"-->
+        <!--android:layout_below="@id/station_history"-->
+        <!--android:id="@+id/station_history_content">-->
+
+    <!--</com.lzh.administrator.androidframe.widget.FlowLayout>-->
+
+
+    <!--<TextView-->
+        <!--android:id="@+id/station_hot"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="历史"-->
+        <!--android:textColor="@color/colorDrakGrey"-->
+        <!--android:textSize="16sp"-->
+        <!--android:background="#e6edf3"-->
+        <!--android:padding="10dp"-->
+        <!--android:layout_below="@id/station_history_content"/>-->
+
+
+    <!--<com.lzh.administrator.androidframe.widget.FlowLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:background="#e6edf3"-->
+        <!--android:layout_below="@id/station_hot"-->
+        <!--android:id="@+id/station_hot_content">-->
+
+    <!--</com.lzh.administrator.androidframe.widget.FlowLayout>-->
+
+
+    <ListView
+        android:id="@+id/query_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/query_layout"
+        android:cacheColorHint="@android:color/transparent"
+        android:divider="@null"
+        android:dividerHeight="0dip"
+        android:listSelector="@android:color/transparent"
+        android:scrollbars="none">
+
+    </ListView>
+
+    <TextView
+        android:id="@+id/query_city_alpha"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_centerInParent="true"
+        android:background="@drawable/shape_corner_city_bg"
+        android:ellipsize="marquee"
+        android:gravity="center"
+        android:maxLength="2"
+        android:singleLine="true"
+        android:textColor="@android:color/white"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:visibility="invisible"
+        android:alpha="0.5" />
+
+    <com.lzh.administrator.androidframe.widget.SideBar
+        android:id="@+id/query_sidebar"
+        android:layout_width="25dp"
+        android:layout_height="match_parent"
+        android:layout_below="@id/query_layout"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/shape_side_bar_normal_bg" />
+
+</RelativeLayout>
