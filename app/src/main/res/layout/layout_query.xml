@@ -22,6 +22,7 @@
         android:paddingLeft="12sp"
         android:drawablePadding="9dp"
         android:dropDownVerticalOffset = "1dp"
+        android:dropDownHeight="100dp"
         />
 
     <ImageView

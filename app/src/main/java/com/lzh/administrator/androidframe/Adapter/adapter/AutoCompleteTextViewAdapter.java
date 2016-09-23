@@ -9,6 +9,7 @@ import com.lzh.administrator.androidframe.Adapter.ViewHolder;
 import com.lzh.administrator.androidframe.Adapter.adapter.base.CommonAdapter;
 import com.lzh.administrator.androidframe.GreenDAo.StationBean;
 import com.lzh.administrator.androidframe.R;
+import com.lzh.administrator.androidframe.Utils.LogUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,12 +21,10 @@ import java.util.List;
 public class AutoCompleteTextViewAdapter extends CommonAdapter<StationBean> implements Filterable{
 
     private ArrayFilter filter;
-    private List<StationBean> mdatas;
     private ArrayList<StationBean> unfilterdatas;
 
     public AutoCompleteTextViewAdapter(Context mContext, List<StationBean> mDatas, int itemLayoutId) {
         super(mContext, mDatas, itemLayoutId);
-        this.mdatas = mDatas;
     }
 
     @Override
@@ -48,7 +47,7 @@ public class AutoCompleteTextViewAdapter extends CommonAdapter<StationBean> impl
         protected FilterResults performFiltering(CharSequence constraint) {
             FilterResults results = new FilterResults();
             if(unfilterdatas==null){
-                unfilterdatas = new ArrayList<>(mdatas);
+                unfilterdatas = new ArrayList<>(mDatas);
             }
             if(constraint==null || constraint.length()==0){
                 ArrayList<StationBean> list = unfilterdatas;
@@ -67,14 +66,16 @@ public class AutoCompleteTextViewAdapter extends CommonAdapter<StationBean> impl
                     if (s != null) {
 
                         if(s.getName()!=null && s.getName().startsWith(prefixString)){
-
+                            LogUtil.d("name :"+s.getName()+" ,prefixString :"+prefixString);
                             newValues.add(s);
                         }else if(s.getPinyin()!=null && s.getPinyin().startsWith(prefixString)){
-
+                            LogUtil.d("Pinyin :"+s.getPinyin()+" ,prefixString :"+prefixString);
                             newValues.add(s);
                         }else if(s.getPinyins()!=null && s.getPinyins().startsWith(prefixString)){
+                            LogUtil.d("Pinyins :"+s.getPinyins()+" ,prefixString :"+prefixString);
                             newValues.add(s);
                         }else if(s.getFirstpys()!=null && s.getFirstpys().startsWith(prefixString)){
+                            LogUtil.d("Firstpys :"+s.getFirstpys()+" ,prefixString :"+prefixString);
                             newValues.add(s);
                         }
                     }
@@ -88,7 +89,7 @@ public class AutoCompleteTextViewAdapter extends CommonAdapter<StationBean> impl
 
         @Override
         protected void publishResults(CharSequence constraint, FilterResults results) {
-            mdatas = (List<StationBean>) results.values;
+            mDatas = (List<StationBean>) results.values;
             if(results.count>0){
                 notifyDataSetChanged();
             }else{
