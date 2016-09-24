@@ -1,11 +1,14 @@
 package com.lzh.administrator.androidframe.Model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Created by lzh27651 on 2016/9/20.
  * 站点
  */
 
-public class TrainStationBean {
+public class TrainStationBean implements Parcelable{
 
     /**
      * 站点名称 北京
@@ -31,6 +34,17 @@ public class TrainStationBean {
      */
     private String mStationCode;
 
+    public TrainStationBean(Parcel source) {
+        mName = source.readString();
+        mPinYin = source.readString();
+        mPinYinS = source.readString();
+        mStationCode = source.readString();
+        mFirstPYS = source.readString();
+    }
+
+    public TrainStationBean() {
+
+    }
 
 
     public String getmName() {
@@ -73,4 +87,29 @@ public class TrainStationBean {
         this.mStationCode = mStationCode;
     }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(mName);
+        dest.writeString(mPinYin);
+        dest.writeString(mPinYinS);
+        dest.writeString(mStationCode);
+        dest.writeString(mFirstPYS);
+    }
+
+    public static final  Parcelable.Creator<TrainStationBean> CREATOR = new Creator<TrainStationBean>() {
+        @Override
+        public TrainStationBean createFromParcel(Parcel source) {
+            return new TrainStationBean(source);
+        }
+
+        @Override
+        public TrainStationBean[] newArray(int size) {
+            return new TrainStationBean[size];
+        }
+    };
 }

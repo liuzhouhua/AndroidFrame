@@ -9,7 +9,7 @@
     android:padding="10dp"
     android:text="Helloworld"
     android:gravity="center"
-    android:background="@drawable/shape_flow_item">
+    android:background="@drawable/shape_flow_item_normal">
 
 
 </TextView>

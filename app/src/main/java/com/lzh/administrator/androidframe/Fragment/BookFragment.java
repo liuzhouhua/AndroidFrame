@@ -10,8 +10,12 @@ import android.widget.TextView;
 import com.kyleduo.switchbutton.SwitchButton;
 import com.lzh.administrator.androidframe.Activity.StationSelectionActivity;
 import com.lzh.administrator.androidframe.Base.BaseFragment;
+import com.lzh.administrator.androidframe.Model.TrainStationBean;
 import com.lzh.administrator.androidframe.R;
 import com.lzh.administrator.androidframe.Utils.LogUtil;
+import com.lzh.administrator.androidframe.constant.Keys;
+
+import static android.app.Activity.RESULT_OK;
 
 /**
  * Created by lzh27651 on 2016/9/13.
@@ -35,6 +39,9 @@ public class BookFragment extends BaseFragment{
     private Button mMain_query;
 
     private ImageView mMain_change;
+
+    private TrainStationBean mFrom;
+    private TrainStationBean mTo;
 
 
     public static BookFragment newInstance(){
@@ -64,7 +71,10 @@ public class BookFragment extends BaseFragment{
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), StationSelectionActivity.class);
-                startActivity(intent);
+                if(mFrom!=null){
+                    intent.putExtra(Keys.FROM_SELECTED_STATION,mFrom);
+                }
+                startActivityForResult(intent,Keys.FROM_STATION);
             }
         });
 
@@ -72,7 +82,16 @@ public class BookFragment extends BaseFragment{
          * 设置目的地item
          */
         mMain_destination_display = (TextView) mMain_destination.findViewById(R.id.main_item_display);
-
+        mMain_destination.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), StationSelectionActivity.class);
+                if(mTo!=null){
+                    intent.putExtra(Keys.TO_SELECTED_STATION,mTo);
+                }
+                startActivityForResult(intent,Keys.TO_STATION);
+            }
+        });
         /**
          * 设置出发日期item
          */
@@ -116,5 +135,24 @@ public class BookFragment extends BaseFragment{
     public void onResume() {
         super.onResume();
         setmCurrentFragment();
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode){
+            case Keys.FROM_STATION:
+                if(resultCode==RESULT_OK){
+                    mFrom = data.getParcelableExtra(Keys.FROM_SELECTED_STATION);
+                    mMain_starting_display.setText(mFrom.getmName());
+                }
+                break;
+            case Keys.TO_STATION:
+                if(resultCode==RESULT_OK){
+                    mTo = data.getParcelableExtra(Keys.TO_SELECTED_STATION);
+                    mMain_destination_display.setText(mTo.getmName());
+                }
+                break;
+        }
     }
 }

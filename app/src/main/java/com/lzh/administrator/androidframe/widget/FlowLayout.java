@@ -1,7 +1,9 @@
 package com.lzh.administrator.androidframe.widget;
 
 import android.content.Context;
+import android.graphics.Rect;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -19,6 +21,9 @@ public class FlowLayout extends ViewGroup{
     private List<List<View>> mAllChildViews = new ArrayList<>();
     //每一行的高度
     private List<Integer> mLineHeight = new ArrayList<>();
+    private MotionEvent mMotionEvent;
+    private OnTagClickListener mOnTagClickListener;
+    private int mLastSelectedPosition = -1;
 
     public FlowLayout(Context context, AttributeSet attrs) {
         this(context, attrs,0);
@@ -122,7 +127,6 @@ public class FlowLayout extends ViewGroup{
          * 设置最终的宽和高
          */
         setMeasuredDimension(modeWidth==MeasureSpec.EXACTLY?sizeWidth:width,modeHeight==MeasureSpec.EXACTLY?sizeHeight:height);
-
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
     }
 
@@ -223,5 +227,80 @@ public class FlowLayout extends ViewGroup{
     @Override
     public LayoutParams generateLayoutParams(AttributeSet attrs) {
         return new MarginLayoutParams(getContext(),attrs);
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        if (event.getAction() == MotionEvent.ACTION_UP)
+        {
+            mMotionEvent = MotionEvent.obtain(event);
+        }
+        return super.onTouchEvent(event);
+    }
+
+    @Override
+    public boolean performClick() {
+        if (mMotionEvent == null)
+            return super.performClick();
+
+        int x = (int) mMotionEvent.getX();
+        int y = (int) mMotionEvent.getY();
+        mMotionEvent = null;
+
+        View view = findChild(x, y);
+        int current = findPosByView(view);
+        if(view!=null){
+            doSelect(view, current);
+            if(mOnTagClickListener!=null){
+                boolean re = mOnTagClickListener.onTagClick(view, current,mLastSelectedPosition,this);
+                if(mLastSelectedPosition!=current){
+                    mLastSelectedPosition = current;
+                }
+                return re;
+
+            }
+        }
+        return super.performClick();
+    }
+
+    private void doSelect(View view, int pos) {
+        view.setSelected(true);
+    }
+
+    private int findPosByView(View view) {
+        final int count = getChildCount();
+        for(int j=0;j<count;j++){
+            if(view==getChildAt(j)){
+                return j;
+            }
+        }
+        return -1;
+    }
+
+    private View findChild(int x, int y) {
+        final int count = getChildCount();
+        for(int i=0;i<count;i++){
+            View view = getChildAt(i);
+            if(view.getVisibility()==GONE){
+                continue;
+            }
+            Rect outRect = new Rect();
+            view.getHitRect(outRect);
+            if(outRect.contains(x,y)){
+                return view;
+            }
+        }
+        return null;
+    }
+
+    public interface OnTagClickListener{
+        public boolean onTagClick(View view, int currentPosition,int lastPostion, FlowLayout parent);
+    }
+
+    public void setmOnTagClickListener(OnTagClickListener mOnTagClickListener) {
+        this.mOnTagClickListener = mOnTagClickListener;
+        if(mOnTagClickListener!=null){
+            setClickable(true);
+        }
     }
 }

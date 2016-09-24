@@ -14,6 +14,8 @@
     <string name="main_student">买学生票</string>
     <string name="main_identity">身份核验须知</string>
     <string name="main_attention">注意事项</string>
-
+    <string name="query_history">历史</string>
+    <string name="query_hot">热门</string>
+    <string name="query_location">当前</string>
     <string name="query_selection_from">选择出发站点</string>
 </resources>
