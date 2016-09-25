@@ -3,6 +3,8 @@ package com.lzh.administrator.androidframe.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -42,6 +44,8 @@ public class BookFragment extends BaseFragment{
 
     private TrainStationBean mFrom;
     private TrainStationBean mTo;
+    private int upToButtom = 0;
+    private int buttomToUp = 0;
 
 
     public static BookFragment newInstance(){
@@ -118,8 +122,103 @@ public class BookFragment extends BaseFragment{
             @Override
             public void onClick(View v) {
                 LogUtil.d("mMain_change clicked!");
+                if(mFrom!=null && mTo!=null){
+                    swipTrainSnntationBean();
+
+
+                    final TranslateAnimation animationUpToButtom = new TranslateAnimation(
+                            Animation.RELATIVE_TO_SELF,0f,Animation.RELATIVE_TO_SELF,0f,
+                            Animation.RELATIVE_TO_SELF,0f,Animation.RELATIVE_TO_SELF,1f
+                    );
+                    animationUpToButtom.setDuration(500);
+
+                    final TranslateAnimation animationButtomToUp1 = new TranslateAnimation(
+                            Animation.RELATIVE_TO_SELF,0f,Animation.RELATIVE_TO_SELF,0f,
+                            Animation.RELATIVE_TO_SELF,1f,Animation.RELATIVE_TO_SELF,0f
+                    );
+                    animationButtomToUp1.setDuration(500);
+
+                    final TranslateAnimation animationButtomToUp = new TranslateAnimation(
+                            Animation.RELATIVE_TO_SELF,0f,Animation.RELATIVE_TO_SELF,0f,
+                            Animation.RELATIVE_TO_SELF,0f,Animation.RELATIVE_TO_SELF,-1f
+                    );
+                    animationButtomToUp.setDuration(500);
+
+                    final TranslateAnimation animationUpToButtom2 = new TranslateAnimation(
+                            Animation.RELATIVE_TO_SELF,0f,Animation.RELATIVE_TO_SELF,0f,
+                            Animation.RELATIVE_TO_SELF,-1f,Animation.RELATIVE_TO_SELF,0f
+                    );
+                    animationUpToButtom2.setDuration(500);
+
+                    animationUpToButtom.setAnimationListener(new Animation.AnimationListener() {
+                        @Override
+                        public void onAnimationStart(Animation animation) {
+                            upToButtom++;
+                        }
+
+                        @Override
+                        public void onAnimationEnd(Animation animation) {
+                            if(upToButtom==1){
+                                mMain_destination_display.setText(mTo.getmName());
+                                mMain_destination_display.startAnimation(animationUpToButtom2);
+                            }else{
+                                upToButtom=0;
+                                mMain_destination_display.clearAnimation();
+                            }
+                        }
+
+                        @Override
+                        public void onAnimationRepeat(Animation animation) {
+
+                        }
+                    });
+
+                    animationButtomToUp.setAnimationListener(new Animation.AnimationListener() {
+                        @Override
+                        public void onAnimationStart(Animation animation) {
+                            buttomToUp++;
+                        }
+
+                        @Override
+                        public void onAnimationEnd(Animation animation) {
+                            if(buttomToUp==1){
+                                mMain_starting_display.setText(mFrom.getmName());
+                                mMain_starting_display.startAnimation(animationButtomToUp1);
+                            }else {
+                                buttomToUp = 0;
+                                mMain_starting_display.clearAnimation();
+                            }
+                        }
+
+                        @Override
+                        public void onAnimationRepeat(Animation animation) {
+
+                        }
+                    });
+
+                    mMain_starting_display.startAnimation(animationUpToButtom);
+                    mMain_destination_display.startAnimation(animationButtomToUp);
+                }
             }
         });
+    }
+
+    private void swipTrainStationBean() {
+        String name = mFrom.getmName();
+        String pinyin = mFrom.getmPinYin();
+        String pinyins = mFrom.getmPinYinS();
+        String stationCode = mFrom.getmStationCode();
+        String firstPYS = mFrom.getmFirstPYS();
+        mFrom.setmName(mTo.getmName());
+        mFrom.setmPinYin(mTo.getmPinYin());
+        mFrom.setmPinYinS(mTo.getmPinYinS());
+        mFrom.setmStationCode(mTo.getmStationCode());
+        mFrom.setmFirstPYS(mTo.getmFirstPYS());
+        mTo.setmName(name);
+        mTo.setmPinYin(pinyin);
+        mTo.setmPinYinS(pinyins);
+        mTo.setmStationCode(stationCode);
+        mTo.setmFirstPYS(firstPYS);
     }
 
     protected void setmCurrentFragment() {

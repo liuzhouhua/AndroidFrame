@@ -235,6 +235,8 @@ public class StationSelectionFragment extends BaseFragment {
                    //适配器里面处理了
                 }else if("letter_content".equals(item.getmStyle())){
                     bean = item.getTrainStationBean();
+                }else{
+                    return;
                 }
                 backToMainWithData(bean);
             }
