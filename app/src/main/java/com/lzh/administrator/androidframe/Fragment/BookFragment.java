@@ -10,12 +10,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.kyleduo.switchbutton.SwitchButton;
+import com.lzh.administrator.androidframe.Activity.CalendarSelectedActivity;
 import com.lzh.administrator.androidframe.Activity.StationSelectionActivity;
 import com.lzh.administrator.androidframe.Base.BaseFragment;
 import com.lzh.administrator.androidframe.Model.TrainStationBean;
 import com.lzh.administrator.androidframe.R;
 import com.lzh.administrator.androidframe.Utils.LogUtil;
 import com.lzh.administrator.androidframe.constant.Keys;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -44,8 +48,11 @@ public class BookFragment extends BaseFragment{
 
     private TrainStationBean mFrom;
     private TrainStationBean mTo;
-    private int upToButtom = 0;
-    private int buttomToUp = 0;
+    private int mYear;
+    private int mMonth;
+    private int mDay;
+    private String mWeek;
+    private Date mDate;
 
 
     public static BookFragment newInstance(){
@@ -100,12 +107,19 @@ public class BookFragment extends BaseFragment{
          * 设置出发日期item
          */
         mMain_starting_date_display = (TextView) mMain_starting_date.findViewById(R.id.main_item_display);
-
+        mMain_starting_date.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), CalendarSelectedActivity.class);
+                intent.putExtra(Keys.DATE,mDate);
+                startActivityForResult(intent,Keys.START_TIME);
+            }
+        });
         /**
          * 设置学生票item
          */
         mMain_student_ticket_switch = (SwitchButton) mMain_student_ticket.findViewById(R.id.main_item_switch);
-
+            
         /**
          * 查询按钮
          */
@@ -123,48 +137,42 @@ public class BookFragment extends BaseFragment{
             public void onClick(View v) {
                 LogUtil.d("mMain_change clicked!");
                 if(mFrom!=null && mTo!=null){
-                    swipTrainSnntationBean();
+                    swipTrainStationBean();
 
 
                     final TranslateAnimation animationUpToButtom = new TranslateAnimation(
                             Animation.RELATIVE_TO_SELF,0f,Animation.RELATIVE_TO_SELF,0f,
-                            Animation.RELATIVE_TO_SELF,0f,Animation.RELATIVE_TO_SELF,1f
+                            Animation.RELATIVE_TO_SELF,0f,Animation.RELATIVE_TO_SELF,1.5f
                     );
                     animationUpToButtom.setDuration(500);
 
                     final TranslateAnimation animationButtomToUp1 = new TranslateAnimation(
                             Animation.RELATIVE_TO_SELF,0f,Animation.RELATIVE_TO_SELF,0f,
-                            Animation.RELATIVE_TO_SELF,1f,Animation.RELATIVE_TO_SELF,0f
+                            Animation.RELATIVE_TO_SELF,1.5f,Animation.RELATIVE_TO_SELF,0f
                     );
                     animationButtomToUp1.setDuration(500);
 
                     final TranslateAnimation animationButtomToUp = new TranslateAnimation(
                             Animation.RELATIVE_TO_SELF,0f,Animation.RELATIVE_TO_SELF,0f,
-                            Animation.RELATIVE_TO_SELF,0f,Animation.RELATIVE_TO_SELF,-1f
+                            Animation.RELATIVE_TO_SELF,0f,Animation.RELATIVE_TO_SELF,-1.5f
                     );
                     animationButtomToUp.setDuration(500);
 
                     final TranslateAnimation animationUpToButtom2 = new TranslateAnimation(
                             Animation.RELATIVE_TO_SELF,0f,Animation.RELATIVE_TO_SELF,0f,
-                            Animation.RELATIVE_TO_SELF,-1f,Animation.RELATIVE_TO_SELF,0f
+                            Animation.RELATIVE_TO_SELF,-1.5f,Animation.RELATIVE_TO_SELF,0f
                     );
                     animationUpToButtom2.setDuration(500);
 
                     animationUpToButtom.setAnimationListener(new Animation.AnimationListener() {
                         @Override
                         public void onAnimationStart(Animation animation) {
-                            upToButtom++;
                         }
 
                         @Override
                         public void onAnimationEnd(Animation animation) {
-                            if(upToButtom==1){
-                                mMain_destination_display.setText(mTo.getmName());
-                                mMain_destination_display.startAnimation(animationUpToButtom2);
-                            }else{
-                                upToButtom=0;
-                                mMain_destination_display.clearAnimation();
-                            }
+                            mMain_destination_display.setText(mTo.getmName());
+                            mMain_starting_display.startAnimation(animationButtomToUp1);
                         }
 
                         @Override
@@ -176,18 +184,12 @@ public class BookFragment extends BaseFragment{
                     animationButtomToUp.setAnimationListener(new Animation.AnimationListener() {
                         @Override
                         public void onAnimationStart(Animation animation) {
-                            buttomToUp++;
                         }
 
                         @Override
                         public void onAnimationEnd(Animation animation) {
-                            if(buttomToUp==1){
-                                mMain_starting_display.setText(mFrom.getmName());
-                                mMain_starting_display.startAnimation(animationButtomToUp1);
-                            }else {
-                                buttomToUp = 0;
-                                mMain_starting_display.clearAnimation();
-                            }
+                            mMain_starting_display.setText(mFrom.getmName());
+                            mMain_destination_display.startAnimation(animationUpToButtom2);
                         }
 
                         @Override
@@ -252,6 +254,21 @@ public class BookFragment extends BaseFragment{
                     mMain_destination_display.setText(mTo.getmName());
                 }
                 break;
+            case Keys.START_TIME:
+                if(resultCode==RESULT_OK){
+                    mYear = data.getIntExtra(Keys.YEAR,2016);
+                    mMonth = data.getIntExtra(Keys.MONTH,9);
+                    mDay = data.getIntExtra(Keys.DAY,26);
+                    mDate = (Date) data.getSerializableExtra(Keys.DATE);
+                    mMain_starting_date_display.setText(mYear+"-"+mMonth+"-"+mDay+" "+getWeek(mDate));
+                }
+                break;
         }
+    }
+
+    public static String getWeek(Date date){
+        SimpleDateFormat sdf = new SimpleDateFormat("EEEE");
+        String week = sdf.format(date);
+        return week;
     }
 }

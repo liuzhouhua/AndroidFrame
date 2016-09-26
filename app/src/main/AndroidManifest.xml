@@ -25,6 +25,7 @@
         </activity>
         <activity android:name=".UI.WebActivity"/>
         <activity android:name=".Activity.StationSelectionActivity"/>
+        <activity android:name=".Activity.CalendarSelectedActivity"/>
     </application>
 
 </manifest>
